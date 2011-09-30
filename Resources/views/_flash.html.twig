@@ -1,0 +1,29 @@
+{% for type in ['warning', 'error', 'success', 'info'] %}
+    {% if app.session.hasFlash(type) %}
+        <div class="alert-message {{type}}">
+            <a class="close" href="#">×</a>
+            <p>{{ app.session.flash(type) }}</p>
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% if app.session.hasFlash('sonata_flash_success') %}
+    <div class="alert-message success">
+        <a class="close" href="#">×</a>
+        <p>{{ app.session.flash('sonata_flash_success') }}</p>
+    </div>
+{% endif %}
+
+{% if app.session.hasFlash('sonata_flash_error') %}
+    <div class="alert-message error">
+        <a class="close" href="#">×</a>
+        <p>{{ app.session.flash('sonata_flash_error') }}</p>
+    </div>
+{% endif %}
+
+{% if app.session.hasFlash('sonata_flash_notice') %}
+    <div class="alert-message warning">
+        <a class="close" href="#">×</a>
+        <p>{{ app.session.flash('sonata_flash_notice') }}</p>
+    </div>
+{% endif %}

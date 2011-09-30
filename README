@@ -1,0 +1,9 @@
+ElaoBootstraBundle
+
+- thème bootstrap pour sonata admin bundle
+
+Installation:
+
+http://sonata-project.org/bundles/admin/master/doc/reference/installation.html
+
+- On doit définir un menu admin
