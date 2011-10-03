@@ -8,5 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class ElaoBootstrapBundle extends Bundle
 {
-
+    public function getParent()
+    {
+        return 'SonataAdminBundle';
+    }
 }

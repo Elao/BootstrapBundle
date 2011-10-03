@@ -6,33 +6,12 @@ use Sonata\AdminBundle\Admin\Admin as BaseAdmin;
 
 class Admin extends BaseAdmin
 {
-    /**
-     * Returns the list template
-     *
-     * @return string the list template
-     */
-    public function getListTemplate()
+    public function getI18nPrefix()
     {
-        return 'ElaoBootstrapBundle:CRUD:list.html.twig';
+        return 'admin.'.$this->getClassnameLabel();
     }
+    
+    protected $formTheme = array('ElaoBootstrapBundle:Form:fields.html.twig');
 
-    /**
-     * Returns the edit template
-     *
-     * @return string the edit template
-     */
-    public function getEditTemplate()
-    {
-        return 'ElaoBootstrapBundle:CRUD:edit.html.twig';
-    }
-
-    /**
-     * Returns the view template
-     *
-     * @return string the view template
-     */
-    public function getShowTemplate()
-    {
-        return 'ElaoBootstrapBundle:CRUD:show.html.twig';
-    }
+    protected $filterTheme = array('ElaoBootstrapBundle:Form:filter_fields.html.twig');
 }

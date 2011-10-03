@@ -19,7 +19,9 @@
         </div>
         <div class="container">
             
-            {% include "ElaoBootstrapBundle::_breadcrumb.html.twig" %}
+            <div class="page-header">
+                <h1>{% block h1 %}{% endblock %}</h1>
+            </div>
             
             {% include "ElaoBootstrapBundle::_flash.html.twig" %}
             
