@@ -5,3 +5,12 @@ body {
 .well label {
     float: none;
 }
+
+
+.alert-message .alert-actions form {
+    display: inline;
+}
+
+.alert-message .alert-actions form input {
+    font-weight: bold;
+}

@@ -1,5 +1,5 @@
-<ul class="breadcrumb">
-    {% if action is defined %}
+{% if action is defined %}
+    <ul class="breadcrumb">
         {% for label, uri in admin.breadcrumbs(action) %}
             {% if loop.last %}
                 <li class="active">{{label}}</li>
@@ -9,5 +9,5 @@
                 </li>
             {% endif %}
         {% endfor %}
-    {% endif %}
-</ul>
+    </ul>
+{% endif %}
