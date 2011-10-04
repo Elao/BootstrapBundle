@@ -33,6 +33,15 @@
         {% endif %}
 
         <div class="row">
+            
+            {% block form %}
+            
+            {% if admin.id(object) %}
+                {% set url = 'edit' %}
+            {% else %}
+                {% set url = 'create' %}
+            {% endif %}
+
 
             <form action="{{ admin.generateUrl(url, {'id': admin.id(object), 'uniqid': admin.uniqid}) }}" {{ form_enctype(form) }} method="POST">
 
@@ -83,18 +92,23 @@
                         {% endif %}
                     {% endif %}
 
-                    {% if admin.hasroute('show') and admin.id(object) and admin.isGranted('VIEW') and admin.show|length > 0 %}
-                        <a href="{{ admin.generateObjectUrl('show', object) }}" class="btn">{% trans from 'SonataAdminBundle' %}link_action_show{% endtrans %}</a>
-                    {% endif %}
-                    {% if admin.hasroute('create') and admin.isGranted('CREATE')%}
-                        <a href="{{ admin.generateUrl('create') }}" class="btn">{% trans from 'SonataAdminBundle' %}link_action_create{% endtrans %}</a>
-                    {% endif %}
-                    {% if admin.hasroute('list') and admin.isGranted('LIST')%}
-                        <a href="{{ admin.generateUrl('list') }}" class="btn">{% trans from 'SonataAdminBundle' %}link_action_list{% endtrans %}</a>
-                    {% endif %}
+                    {% block actions %}
+                        {% if app.request.isxmlhttprequest == false %}
+                            {% if admin.hasroute('show') and admin.id(object) and admin.isGranted('VIEW') and admin.show|length > 0 %}
+                                <a href="{{ admin.generateObjectUrl('show', object) }}" class="btn">{% trans from 'SonataAdminBundle' %}link_action_show{% endtrans %}</a>
+                            {% endif %}
+                            {% if admin.hasroute('create') and admin.isGranted('CREATE')%}
+                                <a href="{{ admin.generateUrl('create') }}" class="btn">{% trans from 'SonataAdminBundle' %}link_action_create{% endtrans %}</a>
+                            {% endif %}
+                            {% if admin.hasroute('list') and admin.isGranted('LIST')%}
+                                <a href="{{ admin.generateUrl('list') }}" class="btn">{% trans from 'SonataAdminBundle' %}link_action_list{% endtrans %}</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endblock %}
                 </div>
             </form>
 
+            {% endblock %}
         </div>
 
     {% endif %}
