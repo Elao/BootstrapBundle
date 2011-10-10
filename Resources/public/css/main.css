@@ -14,3 +14,7 @@ body {
 .alert-message .alert-actions form input {
     font-weight: bold;
 }
+
+.modal form {
+    margin: 0;
+}

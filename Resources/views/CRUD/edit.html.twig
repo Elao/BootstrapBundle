@@ -71,7 +71,7 @@
 
                 {{ form_rest(form) }}
 
-                <div class="actions">
+                <div class="{% if app.request.isxmlhttprequest %}modal-footer{% else %}actions{% endif %}">
                     {% if app.request.isxmlhttprequest %}
                         {% if admin.id(object) %}
                             <input type="submit" name="btn_update" class="btn primary" value="{% trans from 'SonataAdminBundle' %}btn_update{% endtrans %}"/>

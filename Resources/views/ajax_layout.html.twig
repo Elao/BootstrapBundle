@@ -1,0 +1,32 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% block content %}
+    
+
+    <div class="modal-header">
+        <a href="#" class="close">×</a>
+        <h3>{% block h1%}{% endblock %}</h3>
+    </div>
+
+    {% block preview %}{% endblock %}
+    {% block form %}{% endblock %}
+    {% block list %}{% endblock %}
+
+    <div class="sonata-ba-list">
+        <div class="span-18">
+            {% block list_table %}{% endblock %}
+        </div>
+        <div class="span-6 last">
+            {% block list_filters %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
