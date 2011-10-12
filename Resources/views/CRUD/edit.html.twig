@@ -5,7 +5,8 @@
 {% block h1 %}{{admin.i18nPrefix ~ '.edit.title' | trans}}{% endblock %}
 
 {% block body %}
-
+    {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass': 'active', 'ancestorClass': 'active'}, 'list') }}{% endblock %}
+    
     {% if admin.id(object) %}
         {% set url = 'edit' %}
     {% else %}
@@ -113,5 +114,3 @@
 
     {% endif %}
 {% endblock %}
-
-{% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {}, 'list') }}{% endblock %}
