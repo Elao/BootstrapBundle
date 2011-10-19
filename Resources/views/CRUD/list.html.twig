@@ -135,7 +135,7 @@
         {% if admin.datagrid.filters %}
 
             <div class="span4">
-                <form class="form-stacked" action="{{ admin.generateUrl('list') }}" method="GET">
+                <form class="form-stacked form-filter" action="{{ admin.generateUrl('list') }}" method="GET">
                     {% for filter in admin.datagrid.filters %}
                         {{ form_row(form.getChild(filter.name)) }}
                     {% endfor %}

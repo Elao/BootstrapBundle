@@ -28,3 +28,8 @@ body {
 #dashboard table.dashboard-item thead th {
     cursor: pointer;
 }
+
+
+.form-filter input[type="text"], .form-filter select {
+    width: 180px;
+}

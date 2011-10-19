@@ -1,1 +1,28 @@
 {% extends "SonataAdminBundle:Form:filter_admin_fields.html.twig" %}
+
+{#% block field_row %}
+    <div>
+        {{ form_label(form) }}
+        <br />
+
+        <div class="sonata-ba-field">
+            {% block field %}{{ form_widget(form) }}{% endblock %}
+        </div>
+    </div>
+{% endblock field_row %#}
+
+{% block field_row %}
+{% spaceless %}
+    <div class="clearfix {% if errors|length > 0 %}errors{% endif %}">
+        {% set help = attr.help|default(null) %}
+        {{ form_label(form, label|default(null)) }}
+        <div class="input">
+            {{ form_widget(form, {'attr': attr|default(null)}) }}
+            {{ form_errors(form) }}
+            {% if help|default(null) %}
+                <span class="help-block">{{help|trans|raw}}</span>
+            {% endif %}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock field_row %}
