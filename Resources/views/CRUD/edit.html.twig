@@ -82,7 +82,7 @@
                     {% else %}
                         {% if admin.id(object) %}
                             <input type="submit" name="btn_update_and_edit" class="btn primary" value="{% trans from 'SonataAdminBundle' %}btn_update_and_edit_again{% endtrans %}"/>
-                            {% if admin.isGranted('DELETE') %}
+                            {% if admin.hadroute('delete') and admin.isGranted('DELETE') %}
                                 <a href="{{ admin.generateObjectUrl('delete', object) }}" class="btn danger">{% trans from 'SonataAdminBundle' %}link_delete{% endtrans %}</a>
                             {% endif %}
                         {% else %}
