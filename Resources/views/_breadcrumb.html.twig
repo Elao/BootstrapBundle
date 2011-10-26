@@ -2,10 +2,10 @@
     <ul class="breadcrumb">
         {% for label, uri in admin.breadcrumbs(action) %}
             {% if loop.last %}
-                <li class="active">{{label}}</li>
+                <li class="active">{{label|trans}}</li>
             {% else %}
                 <li>
-                    <a href="{{ uri }}">{{label}}</a> <span class="divider">/</span>
+                    <a href="{{ uri }}">{{label|trans}}</a> <span class="divider">/</span>
                 </li>
             {% endif %}
         {% endfor %}
