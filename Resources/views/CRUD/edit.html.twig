@@ -1,8 +1,14 @@
 {% extends base_template %}
 
-{% block title %}{{admin.i18nPrefix ~ '.edit.title' | trans}}{% endblock %}
+{% if admin.id(object) %}
+    {% set title = admin.baseRouteName ~ '.edit.title' %}
+{% else %}
+    {% set title = admin.baseRouteName ~ '.add.title' %}
+{% endif %}
 
-{% block h1 %}{{admin.i18nPrefix ~ '.edit.title' | trans}}{% endblock %}
+{% block title %}{{title | trans}}{% endblock %}
+
+{% block h1 %}{{title | trans}}{% endblock %}
 
 {% block body %}
     {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass': 'active', 'ancestorClass': 'active'}, 'list') }}{% endblock %}
@@ -82,11 +88,10 @@
                     {% else %}
                         {% if admin.id(object) %}
                             <input type="submit" name="btn_update_and_edit" class="btn primary" value="{% trans from 'SonataAdminBundle' %}btn_update_and_edit_again{% endtrans %}"/>
-                            {% if admin.hadroute('delete') and admin.isGranted('DELETE') %}
+                            
+                            {% if admin.isGranted('DELETE') %}
                                 <a href="{{ admin.generateObjectUrl('delete', object) }}" class="btn danger">{% trans from 'SonataAdminBundle' %}link_delete{% endtrans %}</a>
                             {% endif %}
-                        {% else %}
-                            <input type="submit" name="btn_create_and_edit" class="btn primary" value="{% trans from 'SonataAdminBundle' %}btn_create_and_edit_again{% endtrans %}"/>
                         {% endif %}
                     {% endif %}
 

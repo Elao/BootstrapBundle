@@ -1,8 +1,10 @@
 {% extends base_template %}
 
-{% block title %}{{admin.i18nPrefix ~ '.list.title' | trans}}{% endblock %}
+{% set title = admin.baseRouteName ~ '.list.title' %}
 
-{% block h1 %}{{admin.i18nPrefix ~ '.list.title' | trans}}{% endblock %}
+{% block title %}{{title | trans}}{% endblock %}
+
+{% block h1 %}{{title | trans}}{% endblock %}
 
 {% block body %}
 
@@ -85,37 +87,40 @@
                         </div>
                     {% endif %}
 
-                    <div class="well">
+                    {% if batchactions|length > 0 or (admin.hasRoute('create') and admin.isGranted('CREATE'))%}
 
-                        {% if batchactions|length > 0%}
-                            <script type="text/javascript">
-                                jQuery(document).ready(function($){
-                                   $('#list_batch_checkbox').click(function(){
-                                       $(this).closest('table').find("td input[type='checkbox']").attr('checked', $(this).is(':checked'));
-                                   });
-                                   $('.delete_link').click(function(e){
-                                      if (!confirm('{% trans from 'SonataAdminBundle' %}confirm_msg{% endtrans %}')) e.preventDefault();
-                                   });
-                                });
-                            </script>
+                        <div class="well">
 
-                            <select name="action" class="span3">
-                                {% for action, options in batchactions %}
-                                    <option value="{{ action }}">{{ options.label }}</option>
-                                {% endfor %}
-                            </select>
+                            {% if batchactions|length > 0%}
+                                <script type="text/javascript">
+                                    jQuery(document).ready(function($){
+                                       $('#list_batch_checkbox').click(function(){
+                                           $(this).closest('table').find("td input[type='checkbox']").attr('checked', $(this).is(':checked'));
+                                       });
+                                       $('.delete_link').click(function(e){
+                                          if (!confirm('{% trans from 'SonataAdminBundle' %}confirm_msg{% endtrans %}')) e.preventDefault();
+                                       });
+                                    });
+                                </script>
 
-                            <label>
-                                <input type="checkbox" name="all_elements" id="execute_on_matching"  />
-                                <span>{% trans from 'SonataAdminBundle' %}all_elements{% endtrans %}</span>
-                            </label>
-                            <input type="submit" class="btn" value="{% trans from 'SonataAdminBundle' %}btn_batch{% endtrans %}" />
-                        {% endif %}
+                                <select name="action" class="span3">
+                                    {% for action, options in batchactions %}
+                                        <option value="{{ action }}">{{ options.label }}</option>
+                                    {% endfor %}
+                                </select>
 
-                        {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
-                            <a href="{{ admin.generateUrl('create') }}" class="btn primary">{% trans from 'SonataAdminBundle' %}link_action_create{% endtrans %}</a>
-                        {% endif %}
-                    </div>
+                                <label>
+                                    <input type="checkbox" name="all_elements" id="execute_on_matching"  />
+                                    <span>{% trans from 'SonataAdminBundle' %}all_elements{% endtrans %}</span>
+                                </label>
+                                <input type="submit" class="btn" value="{% trans from 'SonataAdminBundle' %}btn_batch{% endtrans %}" />
+                            {% endif %}
+
+                            {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
+                                <a href="{{ admin.generateUrl('create') }}" class="btn primary">{% trans from 'SonataAdminBundle' %}link_action_create{% endtrans %}</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                 </form>
 
             {% else %}
