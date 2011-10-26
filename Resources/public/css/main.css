@@ -34,14 +34,9 @@ body {
     width: 180px;
 }
 
-label[class*="span"]{
-    padding-top: 6px;
-    font-size: 13px;
-    line-height: 18px;
-    float: left;
+label.span1, label.span2, label.span3, label.span4,
+label.span5, label.span6, label.span7, label.span8,
+label.span9, label.span10, label.span11, label.span12{
     width: 130px;
-    text-align: right;
-    color: #404040;
     margin-left: 0;
-    display: block;
 }
