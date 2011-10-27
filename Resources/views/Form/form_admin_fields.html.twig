@@ -1,15 +1,4 @@
-{% extends "SonataAdminBundle:Form:filter_admin_fields.html.twig" %}
-
-{#% block field_row %}
-    <div>
-        {{ form_label(form) }}
-        <br />
-
-        <div class="sonata-ba-field">
-            {% block field %}{{ form_widget(form) }}{% endblock %}
-        </div>
-    </div>
-{% endblock field_row %#}
+{% extends "form_div_layout.html.twig" %}
 
 {% block field_row %}
 {% spaceless %}
@@ -26,3 +15,143 @@
     </div>
 {% endspaceless %}
 {% endblock field_row %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <span class="help-inline">
+        {% for error in errors %}
+            {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+        {% endfor %}
+    </span>
+    {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+
+{% block choice_widget %}
+{% spaceless %}
+    {% if expanded %}
+            <ul class="inputs-list">
+                {% for child in form %}
+                    <li>
+                        <label>
+                            {{ form_widget(child) }}&nbsp;{{ form_label(child) }}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+    {% else %}
+        {{parent()}}
+    {% endif %}
+{% endspaceless %}
+{% endblock choice_widget %}
+
+{% block generic_label %}
+{% spaceless %}
+    {% if required %}
+        {% set attr = attr|merge({'class': attr.class|default('') ~ ' required'}) %}
+    {% endif %}
+    <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
+        {{ label|trans }}
+        {% if required %}
+            <span class="required">*</span>
+        {% endif %}
+    </label>
+{% endspaceless %}
+{% endblock %}
+
+{% block checkbox_row %}
+    <div class="clearfix {% if errors|length > 0 %}errors{% endif %}">
+        {% set help = attr.help|default(null) %}
+        <div class="input {% if errors|length > 0 %} error {% endif %}">
+            <ul class="inputs-list">
+                <li>
+                    <label>
+                        {{ form_widget(form) }}
+                        {{ form_label(form, label|default(null)) }}
+                    </label>
+                </li>
+            </ul>
+            {% if errors|length > 0 %}
+                <span class="help-block">{{ form_errors(form) }}</span>
+            {% endif %}
+            {% if help|default(null) %}
+                <span class="help-block">{{help|trans|raw}}</span>
+            {% endif %}
+        </div>
+   </div>
+{% endblock %}
+
+
+{% block checkbox_label %}
+    <span>{{ label }}</span>
+{% endblock checkbox_label %}
+ 
+{% block radio_label %}
+    <span>{{ label }}</span>
+{% endblock radio_label %}
+    
+{# Custom Sonata Admin Extension #}
+{% block sonata_admin_orm_one_to_one_widget %}
+    {% include 'SonataAdminBundle:CRUD:edit_orm_one_to_one.html.twig' %}
+{% endblock %}
+
+{% block sonata_admin_orm_many_to_many_widget %}
+    {% include 'SonataAdminBundle:CRUD:edit_orm_many_to_many.html.twig' %}
+{% endblock %}
+
+{% block sonata_admin_orm_many_to_one_widget %}
+    {% include 'SonataAdminBundle:CRUD:edit_orm_many_to_one.html.twig' %}
+{% endblock %}
+
+{% block sonata_admin_orm_one_to_many_widget %}
+    {% include 'SonataAdminBundle:CRUD:edit_orm_one_to_many.html.twig' %}
+{% endblock %}
+
+{% block sonata_type_model_widget %}
+    {#
+        This is not the best way to do if
+        TODO : improve this part
+    #}
+
+    {#model {{ sonata_admin.field_description.mappingtype }}#}
+
+    {% if sonata_admin.field_description is empty %}
+        {{ block('choice_widget') }}
+    {% elseif sonata_admin.field_description.mappingtype == 1 %}
+        {{ block('sonata_admin_orm_one_to_one_widget') }}
+    {% elseif sonata_admin.field_description.mappingtype == 2 %}
+        {{ block('sonata_admin_orm_many_to_one_widget') }}
+    {% elseif sonata_admin.field_description.mappingtype == 8 %}
+        {{ block('sonata_admin_orm_many_to_many_widget') }}
+    {% elseif sonata_admin.field_description.mappingtype == 4 %}
+        {{ block('sonata_admin_orm_one_to_many_widget') }}
+    {% else %}
+        {#INVALID MODE : {{ id }}#}
+        {{ block('choice_widget') }}
+    {% endif %}
+{% endblock %}
+
+{% block sonata_type_admin_widget %}
+    {#admin {{ sonata_admin.field_description.mappingtype }}#}
+    {% if sonata_admin.field_description.mappingtype == 1 %}
+        {{ block('sonata_admin_orm_one_to_one_widget') }}
+    {% elseif sonata_admin.field_description.mappingtype == 2 %}
+        {{ block('sonata_admin_orm_many_to_one_widget') }}
+    {% elseif sonata_admin.field_description.mappingtype == 8 %}
+        {{ block('sonata_admin_orm_many_to_many_widget') }}
+    {% elseif sonata_admin.field_description.mappingtype == 4 %}
+        ICI
+        {{ block('sonata_admin_orm_one_to_many_widget') }}
+    {% else %}
+        INVALID MODE : {{ id }}
+    {% endif %}
+{% endblock %}
+
+{% block sonata_type_collection_widget %}
+    {% if sonata_admin.field_description.mappingtype == 4 %}
+        {{ block('sonata_admin_orm_one_to_many_widget') }}
+    {% else %}
+        INVALID MODE : {{ id }} - type : sonata_type_collection - mapping : {{ sonata_admin.field_description.mappingtype }}
+    {% endif %}
+{% endblock %}
