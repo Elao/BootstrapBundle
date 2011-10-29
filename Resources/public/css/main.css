@@ -40,3 +40,7 @@ label.span9, label.span10, label.span11, label.span12{
     width: 130px;
     margin-left: 0;
 }
+
+th.sonata-ba-list-field-header-batch {
+    width: 12px;
+}
