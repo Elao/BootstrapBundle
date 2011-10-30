@@ -15,8 +15,7 @@
             {% if admin.datagrid.results|length > 0 %}
 
                 {% set batchactions = admin.batchactions %}
-
-                {% if admin.datagrid.filters %}
+                {% if (admin.parentAssociationMapping and admin.datagrid.filters|length > 1) or (admin.parentAssociationMapping == null and admin.datagrid.filters|length >= 1) %}
                     <a href="" class="btn btn-filter" data-controls-modal="modal-filter">Filtrer</a>
                 {% endif %}
 
