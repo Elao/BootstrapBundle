@@ -11,10 +11,14 @@
     {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass': 'active', 'ancestorClass': 'active'}, 'list') }}{% endblock %}
 
     <div class="row">
-        <div class="{% if admin.datagrid.filters %}span12{% else %}span16{% endif %}">
+        <div class="span16">
             {% if admin.datagrid.results|length > 0 %}
 
                 {% set batchactions = admin.batchactions %}
+
+                {% if admin.datagrid.filters %}
+                    <a href="" class="btn btn-filter" data-controls-modal="modal-filter">Filtrer</a>
+                {% endif %}
 
                 <form action="{{ admin.generateUrl('batch', admin.filterParameters) }}" method="POST" >
                     <table class="zebra-striped">
@@ -137,25 +141,28 @@
 
             {% endif %}
         </div>
-        {% if admin.datagrid.filters %}
 
-            <div class="span4">
-                <form class="form-stacked form-filter" action="{{ admin.generateUrl('list') }}" method="GET">
+    </div>
+
+    {% if admin.datagrid.filters %}
+        <div class="modal hide" id="modal-filter">
+            <form class="form-stacked form-filter" action="{{ admin.generateUrl('list') }}" method="GET">
+                <div class="modal-header">
+                    <a href="#" class="close">×</a>
+                    <h3>Search &amp; Filter</h3>
+                </div>
+                <div class="modal-body">
                     {% for filter in admin.datagrid.filters %}
-                        {{ form_row(form.getChild(filter.name)) }}
+                        {#{ form_row(form.getChild(filter.name)) }#}
                     {% endfor %}
 
                     {{ form_rest(form) }}
-
-                    <div class="actions">
-                        <button class="btn small primary">{% trans from 'SonataAdminBundle' %}btn_filter{% endtrans %}</button>
-                        <a href="{{ admin.generateUrl('list') }}" class="btn small">{% trans from 'SonataAdminBundle' %}link_reset_filter{% endtrans %}</a>
-                    </div>
-
-                </form>
-            </div>
-
-        {% endif %}
-    </div>
-
+                </div>
+                <div class="modal-footer">
+                    <button class="btn primary">{% trans from 'SonataAdminBundle' %}btn_filter{% endtrans %}</button>
+                    <a href="{{ admin.generateUrl('list') }}" class="btn">{% trans from 'SonataAdminBundle' %}link_reset_filter{% endtrans %}</a>
+                </div>
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
