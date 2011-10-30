@@ -84,7 +84,7 @@
                                     </li>
                                 {% endfor %}
 
-                                <li class="next {% if admin.datagrid.pager.page != admin.datagrid.pager.nextpage %}disabled{% endif %}">
+                                <li class="next {% if admin.datagrid.pager.page == admin.datagrid.pager.nextpage %}disabled{% endif %}">
                                     <a href="{{ admin.generateUrl('list', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.nextpage)) }}">{% trans from 'SonataAdminBundle' %}link_next_pager{% endtrans %}</a>
                                 </li>
                             </ul>
