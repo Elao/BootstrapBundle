@@ -17,7 +17,9 @@
 
                 <button type="submit" class="btn danger small">{% trans from 'SonataAdminBundle' %}btn_delete{% endtrans %}</button>
 
-                <a class="btn small success" href="{{ admin.generateObjectUrl('edit', object) }}">{% trans from 'SonataAdminBundle' %}link_action_edit{% endtrans %}</a>
+                {% if admin.hasRoute('edit') %}
+                    <a class="btn small success" href="{{ admin.generateObjectUrl('edit', object) }}">{% trans from 'SonataAdminBundle' %}link_action_edit{% endtrans %}</a>
+                {% endif %}
 
                 <a href="{{ admin.generateUrl('list') }}" class="btn small">{% trans from 'SonataAdminBundle' %}link_action_list{% endtrans %}</a>
             </form>
