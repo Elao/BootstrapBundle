@@ -1,0 +1,27 @@
+{% extends base_template %}
+
+{% block title %}{% trans from 'SonataAdminBundle' %}title_delete{% endtrans %}{% endblock %}
+
+{% block h1 %}{% trans from 'SonataAdminBundle' %}title_delete{% endtrans %}{% endblock %}
+
+{% block body %}
+
+    <div class="alert-message block-message warning">
+        <a class="close" href="#">×</a>
+        <p>
+            {% trans with {'%object%': object} from 'SonataAdminBundle' %}message_delete_confirmation{% endtrans %}
+        </p>
+        <div class="alert-actions">
+            <form method="POST" action="{{ admin.generateObjectUrl('delete', object) }}">
+                <input type="hidden" value="DELETE" name="_method" />
+
+                <button type="submit" class="btn danger small">{% trans from 'SonataAdminBundle' %}btn_delete{% endtrans %}</button>
+
+                <a class="btn small success" href="{{ admin.generateObjectUrl('edit', object) }}">{% trans from 'SonataAdminBundle' %}link_action_edit{% endtrans %}</a>
+
+                <a href="{{ admin.generateUrl('list') }}" class="btn small">{% trans from 'SonataAdminBundle' %}link_action_list{% endtrans %}</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
