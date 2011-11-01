@@ -29,9 +29,13 @@ body {
     cursor: pointer;
 }
 
+.form-filter {
+    padding-left: 0;
+}
 
 .form-filter input[type="text"], .form-filter select {
     width: 180px;
+    margin-right: 10px;
 }
 
 label.span1, label.span2, label.span3, label.span4,
@@ -39,4 +43,21 @@ label.span5, label.span6, label.span7, label.span8,
 label.span9, label.span10, label.span11, label.span12{
     width: 130px;
     margin-left: 0;
+}
+
+th.sonata-ba-list-field-header-batch {
+    width: 12px;
+}
+
+.btn-filter {
+    margin-bottom: 10px;
+}
+
+.modal .modal-body {
+    overflow: auto;
+}
+
+.modal {
+    top: 50px;
+    margin-top: 0;
 }

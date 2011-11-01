@@ -81,27 +81,23 @@
                 <div class="{% if app.request.isxmlhttprequest %}modal-footer{% else %}actions{% endif %}">
                     {% if app.request.isxmlhttprequest %}
                         {% if admin.id(object) %}
-                            <input type="submit" name="btn_update" class="btn primary" value="{% trans from 'SonataAdminBundle' %}btn_update{% endtrans %}"/>
-                        {% else %}
-                            <input type="submit" name="btn_create" class="btn primary" value="{% trans from 'SonataAdminBundle' %}btn_create{% endtrans %}"/>
+                            <input type="submit" class="btn primary" name="btn_update" value="{% trans from 'SonataAdminBundle' %}btn_update{% endtrans %}"/>
                         {% endif %}
                     {% else %}
                         {% if admin.id(object) %}
-                            <input type="submit" name="btn_update_and_edit" class="btn primary" value="{% trans from 'SonataAdminBundle' %}btn_update_and_edit_again{% endtrans %}"/>
+                            <input type="submit" class="btn primary" name="btn_update_and_edit" value="{% trans from 'SonataAdminBundle' %}btn_update_and_edit_again{% endtrans %}"/>
                             
-                            {% if admin.isGranted('DELETE') %}
-                                <a href="{{ admin.generateObjectUrl('delete', object) }}" class="btn danger">{% trans from 'SonataAdminBundle' %}link_delete{% endtrans %}</a>
+                            {% if admin.hasroute('delete') and admin.isGranted('DELETE') %}
+                                <a class="btn danger" href="{{ admin.generateObjectUrl('delete', object) }}">{% trans from 'SonataAdminBundle' %}link_delete{% endtrans %}</a>
                             {% endif %}
+                        {% else %}
+                            <input class="btn primary" type="submit" name="btn_create_and_edit" value="{% trans from 'SonataAdminBundle' %}btn_create_and_edit_again{% endtrans %}"/>
                         {% endif %}
                     {% endif %}
 
-                    {% block actions %}
-                        {% if app.request.isxmlhttprequest == false %}
-                            {% if admin.hasroute('list') and admin.isGranted('LIST')%}
-                                <a href="{{ admin.generateUrl('list') }}" class="btn">{% trans from 'SonataAdminBundle' %}link_action_list{% endtrans %}</a>
-                            {% endif %}
-                        {% endif %}
-                    {% endblock %}
+                    {% if admin.hasroute('list') and admin.isGranted('LIST')%}
+                        <a href="{{ admin.generateUrl('list') }}" class="btn">{% trans from 'SonataAdminBundle' %}link_action_list{% endtrans %}</a>
+                    {% endif %}
                 </div>
             </form>
 
