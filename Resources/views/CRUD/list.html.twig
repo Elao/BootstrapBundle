@@ -152,7 +152,7 @@
                 </div>
                 <div class="modal-body">
                     {% for filter in admin.datagrid.filters %}
-                        {#{ form_row(form.getChild(filter.name)) }#}
+                        {{ form_row(form.getChild(filter.name)) }}
                     {% endfor %}
 
                     {{ form_rest(form) }}
