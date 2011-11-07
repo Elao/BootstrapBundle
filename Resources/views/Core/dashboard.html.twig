@@ -6,7 +6,7 @@
 
     <div id="dashboard">
         {% for group in groups %}
-            <table class="zebra-striped dashboard-item">
+            <table class="bordered-table zebra-striped dashboard-item">
                 <thead>
                     <tr>
                         <th colspan="2">{{ group.label|trans({}, 'SonataAdminBundle') }}</th>

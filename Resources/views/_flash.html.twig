@@ -21,9 +21,9 @@
     </div>
 {% endif %}
 
-{% if app.session.hasFlash('sonata_flash_notice') %}
+{% if app.session.hasFlash('sonata_flash_info') %}
     <div class="alert-message warning">
         <a class="close" href="#">×</a>
-        <p>{{ app.session.flash('sonata_flash_notice') }}</p>
+        <p>{{ app.session.flash('sonata_flash_info') }}</p>
     </div>
 {% endif %}

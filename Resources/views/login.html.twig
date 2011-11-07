@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="{{app.session.locale}}">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+            <link rel="stylesheet" href="{{asset('css/smoothness/jquery-ui-1.8.16.custom.css')}}">
+            <link rel="stylesheet" href="{{asset('bundles/elaobootstrap/css/main.css')}}">
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="topbar" data-dropdown="dropdown">
+            <div class="topbar-inner">
+                <div class="container">
+                    {% include "ElaoBootstrapBundle::_header.html.twig" %}
+                </div>
+            </div><!-- /topbar-inner -->
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span6 offset5">
+                    <form action="{{path(url_check)}}" method="post" class="form-stacked">
+                        <fieldset>
+                            <legend>Se connecter</legend>
+                            <div class="clearfix">
+                                <label for="username">Pseudo</label>
+                                <div class="input">
+                                    <input class="xlarge" id="username" name="_username" type="text" value="{{last_username}}"/>
+                                </div>
+                            </div><!-- /clearfix -->
+
+                            <div class="clearfix {% if error %}error{% endif %}">
+                                <label for="password">Mot de passe</label>
+                                <div class="input">
+                                    <input class="xlarge" id="password" name="_password" type="password"/>
+                                </div>
+                                {% if error %}
+                                    <span class="help-block error">{{error.message}}</span>
+                                {% endif %}
+                            </div><!-- /clearfix -->
+
+                            <div class="actions">
+                                <input type="submit" class="btn primary" value="Connexion">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div> 
+    </body>
+</html>
