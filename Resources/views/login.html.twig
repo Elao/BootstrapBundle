@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+            <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
             <link rel="stylesheet" href="{{asset('css/smoothness/jquery-ui-1.8.16.custom.css')}}">
             <link rel="stylesheet" href="{{asset('bundles/elaobootstrap/css/main.css')}}">
         {% endblock %}
