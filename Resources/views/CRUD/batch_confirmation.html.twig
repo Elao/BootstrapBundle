@@ -18,12 +18,6 @@
                     {{ form_rest(form) }}
                 </div>
                 
-                <ul>
-                    {% for result in admin.datagrid.results %}
-                        <li>{{result}}</li>
-                    {% endfor %}
-                </ul>
-
                 <input type="submit" value="{% trans from 'SonataAdminBundle' %}btn_execute_batch_action{% endtrans %}" class="btn danger small"/>
             </form>
             {% if admin.hasRoute('list') and admin.isGranted('LIST')%}

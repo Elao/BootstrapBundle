@@ -23,10 +23,15 @@ body {
     margin: 0;
     margin-right: 10px;
     margin-bottom: 10px;
+    border-radius: 0;
 }
 
 #dashboard table.dashboard-item thead th {
-    cursor: pointer;
+    background-image: -moz-linear-gradient(-90deg, #f8f8f8 , #e2e2e2);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F8F8F8), to(#E2E2E2));
+    border-radius: 0 !important;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
 }
 
 .form-filter {
@@ -60,4 +65,13 @@ th.sonata-ba-list-field-header-batch {
 .modal {
     top: 50px;
     margin-top: 0;
+}
+
+.topbar h3 a, .topbar .brand {
+    line-height: 28px;
+    padding: 5px 20px;
+}
+
+.topbar h3 a, .topbar .brand img {
+    vertical-align: top;
 }

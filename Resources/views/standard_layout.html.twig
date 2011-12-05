@@ -1,8 +1,25 @@
+{% set _title = block('title') %}
 <!DOCTYPE html>
 <html lang="{{app.session.locale}}">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>
+            {% trans from 'SonataAdminBundle' %}Admin{% endtrans %}
+
+            {% if _title is not empty %}
+                {{ _title|raw }}
+            {% else %}
+                {% if action is defined %}
+                    -
+                    {% for label, uri in admin.breadcrumbs(action) %}
+                        {% if not loop.first  %}
+                            &gt;
+                        {% endif %}
+                        {{ label }}
+                    {% endfor %}
+                {% endif %}
+            {% endif%}
+        </title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{asset('bundles/elaobootstrap/css/bootstrap.css')}}">
             <link rel="stylesheet" href="{{asset('css/smoothness/jquery-ui-1.8.16.custom.css')}}">
@@ -22,7 +39,19 @@
         <div class="topbar" data-dropdown="dropdown">
             <div class="topbar-inner">
                 <div class="container">
-                    {% include "ElaoBootstrapBundle::_header.html.twig" %}
+                    {% block logo %}
+                        <a href="{{ url('sonata_admin_dashboard') }}" class="brand">
+                            <img src="{{ asset(admin_pool.titlelogo) }}"  />
+                            {{ admin_pool.title }}
+                        </a>
+                    {% endblock %}
+
+                    {% block menu %}
+                        {{ knp_menu_render('admin', {'currentClass': 'active', 'ancestorClass': 'active'}) }}
+                    {% endblock %}
+
+                    {% block user %}
+                    {% endblock %}
                 </div>
             </div><!-- /topbar-inner -->
         </div>
@@ -30,9 +59,21 @@
             
             {% include "ElaoBootstrapBundle::_breadcrumb.html.twig" %}
             
-            <div class="page-header">
-                <h1>{% block h1 %}{% endblock %}</h1>
-            </div>
+            {% if _title is not empty or action is defined %}
+                <div class="page-header">
+                    <h1>
+                        {% if _title is not empty %}
+                            {{ _title|raw }}
+                        {% elseif action is defined %}
+                            {% for label, uri in admin.breadcrumbs(action) %}
+                                {% if loop.last  %}
+                                    {{ label }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif%}
+                    </h1>
+                </div>
+            {% endif%}
             
             {% include "ElaoBootstrapBundle::_flash.html.twig" %}
             

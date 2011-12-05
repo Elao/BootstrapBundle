@@ -1,11 +1,5 @@
 {% extends base_template %}
 
-{% set title = admin.baseRouteName ~ '.list.title' %}
-
-{% block title %}{{title | trans}}{% endblock %}
-
-{% block h1 %}{{title | trans}}{% endblock %}
-
 {% block body %}
 
     {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass': 'active', 'ancestorClass': 'active'}, 'list') }}{% endblock %}
